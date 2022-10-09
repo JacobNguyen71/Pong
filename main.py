@@ -1,4 +1,5 @@
 import pygame
+from game import Game
 
 def main():
     "Width and height for our pygame display"
@@ -10,3 +11,7 @@ def main():
     pygame.display.set_caption('Pong')
     surface = pygame.display.get_surface()
     game = Game(surface)
+    game.play()
+    pygame.quit()
+
+main()
