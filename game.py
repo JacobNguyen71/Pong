@@ -26,13 +26,15 @@ class Game:
         centerY = height//2
 
         "Generate a random velocity between the two numbers"
-        ballVelocity = random.randint(-5, 5)
-        self.ball = Ball(colorWhite, ballRadius, (centerX, centerY), ballVelocity, self.surface)
+        ballVelocity = [-5, 5]
+        self.ball = Ball(colorWhite, ballRadius, [centerX, centerY], ballVelocity, self.surface)
 
     def play(self):
         while not self.closeClicked:
             self.handleEvents()
             self.draw()
+            if self.continueGame:
+                self.update()
             self.gameClock.tick(self.FPS)
 
     def handleEvents(self):
@@ -45,4 +47,7 @@ class Game:
         self.surface.fill(self.bgColor)
         self.ball.draw()
         pygame.display.update()
+
+    def update(self):
+        self.ball.move()
 
