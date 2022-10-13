@@ -17,3 +17,10 @@ class Ball:
 
     def getRadius(self):
         return self.radius
+
+    def move(self):
+        size = self.surface.get_size()
+        for i in range(0, len(size)):
+            self.center[i] = (self.center[i] + self.velocity[i])
+            if (self.center[i] < self.radius) or (self.center[i] > size[i] - self.radius):
+                self.velocity[i] = -self.velocity[i]
