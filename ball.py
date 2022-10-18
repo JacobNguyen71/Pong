@@ -24,3 +24,9 @@ class Ball:
             self.center[i] = (self.center[i] + self.velocity[i])
             if (self.center[i] < self.radius) or (self.center[i] > size[i] - self.radius):
                 self.velocity[i] = -self.velocity[i]
+
+    def reverseVelocity(self):
+        self.velocity[0] = -self.velocity[0]
+
+    def getCenter(self):
+        return self.center

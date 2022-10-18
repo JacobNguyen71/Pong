@@ -44,6 +44,7 @@ class Game:
         self.ball = Ball(colorWhite, ballRadius, [centerX, centerY], ballVelocity, self.surface)
         self.leftPaddle = Paddle(colorWhite, leftX, top, boxWidth, boxHeight, paddleVelocity, self.surface)
         self.rightPaddle = Paddle(colorWhite, rightX, top, boxWidth, boxHeight, paddleVelocity, self.surface)
+
     def play(self):
         while not self.closeClicked:
             self.handleEvents()
@@ -67,3 +68,6 @@ class Game:
 
     def update(self):
         self.ball.move()
+        if self.leftPaddle.getRect().collidepoint(self.ball.getCenter()) or self.rightPaddle.getRect().collidepoint(
+                self.ball.getCenter()):
+            self.ball.reverseVelocity()
