@@ -1,6 +1,8 @@
 import pygame
 from ball import Ball
+from paddle import Paddle
 import random
+
 
 class Game:
     def __init__(self, surface):
@@ -11,24 +13,37 @@ class Game:
         self.closeClicked = False
         self.continueGame = True
 
-        "Width and height of our surface"
+        "width and height of our surface"
         width = self.surface.get_width()
         height = self.surface.get_height()
 
-        "Game colors"
+        "game colors"
         colorWhite = 'white'
 
         "sizes for objects in our game"
         ballRadius = 5
 
-        "Determine the center of the screen"
-        centerX = width//2
-        centerY = height//2
+        "determine the center of the screen"
+        centerX = width // 2
+        centerY = height // 2
 
-        "Generate a random velocity between the two numbers"
-        ballVelocity = [-5, 5]
+        "paddle dimensions"
+        boxWidth = 10
+        boxHeight = 80
+
+        "determine the position of paddle"
+        leftX = width - (14 * (width // 15))
+        rightX = width - width // 15
+        top = height // 2 - (boxHeight // 2)
+
+        "velocity of items in our game"
+        ballVelocity = random.randint(-2, 2)
+        paddleVelocity = 20
+        "generate a random velocity between the two numbers"
+        ballVelocity = [-ballVelocity, ballVelocity]
         self.ball = Ball(colorWhite, ballRadius, [centerX, centerY], ballVelocity, self.surface)
-
+        self.leftPaddle = Paddle(colorWhite, leftX, top, boxWidth, boxHeight, paddleVelocity, self.surface)
+        self.rightPaddle = Paddle(colorWhite, rightX, top, boxWidth, boxHeight, paddleVelocity, self.surface)
     def play(self):
         while not self.closeClicked:
             self.handleEvents()
@@ -46,8 +61,9 @@ class Game:
     def draw(self):
         self.surface.fill(self.bgColor)
         self.ball.draw()
+        self.leftPaddle.draw()
+        self.rightPaddle.draw()
         pygame.display.update()
 
     def update(self):
         self.ball.move()
-
