@@ -58,6 +58,16 @@ class Game:
         for event in events:
             if event.type == pygame.QUIT:
                 self.closeClicked = True
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_q:
+                    self.leftPaddle.move('up')
+                if event.key == pygame.K_a:
+                    self.leftPaddle.move('down')
+                if event.key == pygame.K_p:
+                    self.rightPaddle.move('up')
+                if event.key == pygame.K_l:
+                    self.rightPaddle.move('down')
+
 
     def draw(self):
         self.surface.fill(self.bgColor)
@@ -71,3 +81,5 @@ class Game:
         if self.leftPaddle.getRect().collidepoint(self.ball.getCenter()) or self.rightPaddle.getRect().collidepoint(
                 self.ball.getCenter()):
             self.ball.reverseVelocity()
+
+

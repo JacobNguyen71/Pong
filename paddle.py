@@ -17,3 +17,9 @@ class Paddle:
 
     def getRect(self):
         return self.rect
+
+    def move(self, direction):
+        if direction == 'up':
+            self.rect.top -= self.velocity
+        if direction == 'down':
+            self.rect.top += self.velocity
