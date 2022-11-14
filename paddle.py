@@ -23,3 +23,7 @@ class Paddle:
             self.rect.top -= self.velocity
         if direction == 'down':
             self.rect.top += self.velocity
+        while self.rect.top > 320:
+            self.rect.top = self.rect.top - self.velocity
+        while self.rect.top < 0:
+            self.rect.top = self.rect.top + self.velocity
