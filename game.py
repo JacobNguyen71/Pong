@@ -18,7 +18,10 @@ class Game:
         height = self.surface.get_height()
 
         "game colors"
-        colorWhite = 'white'
+        self.colorWhite = 'white'
+
+        "game font size"
+        self.fontSize = 72
 
         "sizes for objects in our game"
         ballRadius = 5
@@ -41,9 +44,9 @@ class Game:
         paddleVelocity = 20
         "generate a random velocity between the two numbers"
         ballVelocity = [-ballVelocity, ballVelocity]
-        self.ball = Ball(colorWhite, ballRadius, [centerX, centerY], ballVelocity, self.surface)
-        self.leftPaddle = Paddle(colorWhite, leftX, top, boxWidth, boxHeight, paddleVelocity, self.surface)
-        self.rightPaddle = Paddle(colorWhite, rightX, top, boxWidth, boxHeight, paddleVelocity, self.surface)
+        self.ball = Ball(self.colorWhite, ballRadius, [centerX, centerY], ballVelocity, self.surface)
+        self.leftPaddle = Paddle(self.colorWhite, leftX, top, boxWidth, boxHeight, paddleVelocity, self.surface)
+        self.rightPaddle = Paddle(self.colorWhite, rightX, top, boxWidth, boxHeight, paddleVelocity, self.surface)
 
     def play(self):
         while not self.closeClicked:
@@ -68,7 +71,6 @@ class Game:
                 if event.key == pygame.K_l:
                     self.rightPaddle.move('down')
 
-
     def draw(self):
         self.surface.fill(self.bgColor)
         self.ball.draw()
@@ -82,4 +84,8 @@ class Game:
                 self.ball.getCenter()):
             self.ball.reverseVelocity()
 
+    def drawScore(self, player):
+        font = pygame.font.SysFont('', self.fontSize)
+        image = font.render(str(player), True, self.colorWhite)
 
+        self.surface.blit()
